@@ -18,7 +18,8 @@ namespace BulkyBook.DataAccess.DbInitializer
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
 
-        public DbInitializer(UserManager<IdentityUser> userManager,
+        public DbInitializer(
+            UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext db)
         {
@@ -55,17 +56,17 @@ namespace BulkyBook.DataAccess.DbInitializer
 
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "admin@suryadeep.com",
-                    Email = "admin@suryadeep.com",
+                    UserName = "adm@suryadeep.com",
+                    Email = "adm@suryadeep.com",
                     Name = "Suryadeep Jaykar",
                     PhoneNumber = "78787787887",
                     StreetAddress = "test 123 venue",
                     State = "Mah",
                     PostalCode = "415515",
                     City = "Wai"
-                }, "Satara@123").GetAwaiter().GetResult();
+                },"Satara@123").GetAwaiter().GetResult();
 
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@suryadeep.com");
+                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "adm@suryadeep.com");
                 _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
             }
 
