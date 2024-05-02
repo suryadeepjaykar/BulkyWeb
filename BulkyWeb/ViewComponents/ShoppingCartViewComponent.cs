@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
+
+//added viewcomponents
 namespace BulkyBookWeb.ViewComponents
 {
     public class ShoppingCartViewComponent: ViewComponent
