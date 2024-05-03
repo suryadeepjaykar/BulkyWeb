@@ -56,17 +56,17 @@ namespace BulkyBook.DataAccess.DbInitializer
 
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "admin@gmail.com",
-                    Email = "admin@gmail.com",
+                    UserName = "admin@suryadeep.com",
+                    Email = "admin@suryadeep.com",
                     Name = "Suryadeep Jaykar",
                     PhoneNumber = "78787787887",
                     StreetAddress = "test 123 venue",
                     State = "Maharashtra",
                     PostalCode = "415515",
                     City = "Wai"
-                },"Satara@123").GetAwaiter().GetResult();
+                }, "Surya@123").GetAwaiter().GetResult();
 
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@gmail.com");
+                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@suryadeep.com");
                 _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
             }
 
