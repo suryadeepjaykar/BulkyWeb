@@ -1,5 +1,5 @@
-﻿using BulkyBook.DataAccess.Data;
-using BulkyBook.DataAccess.Repository.IRepository;
+﻿using BulkyBook.DataAccess.Repository.IRepository;
+using BulkyBook.DataAcess.Data;
 using BulkyBook.Models;
 using System;
 using System.Collections.Generic;
@@ -10,31 +10,35 @@ using System.Threading.Tasks;
 
 namespace BulkyBook.DataAccess.Repository
 {
-    public class ProductRepository : Repository<Product>,IProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
         private ApplicationDbContext _db;
         public ProductRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
+
+        
+
         public void Update(Product obj)
         {
-            var objFromDB = _db.Products.FirstOrDefault(p => p.Id == obj.Id);
-            if (objFromDB != null)
+            var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
+            if (objFromDb != null)
             {
-                objFromDB.Title = obj.Title;
-                objFromDB.ISBN = obj.ISBN;
-                objFromDB.Price = obj.Price;
-                objFromDB.Price50 = obj.Price50;
-                objFromDB.ListPrice = obj.ListPrice;
-                objFromDB.Price100 = obj.Price100;
-                objFromDB.Description = obj.Description;
-                objFromDB.CategoryId = obj.CategoryId;
-                objFromDB.Author = obj.Author;
-
-                if (obj.ImageUrl != null) {
-                    objFromDB.ImageUrl = obj.ImageUrl;
-                }
+                objFromDb.Title = obj.Title;
+                objFromDb.ISBN = obj.ISBN;
+                objFromDb.Price = obj.Price;
+                objFromDb.Price50 = obj.Price50;
+                objFromDb.ListPrice = obj.ListPrice;
+                objFromDb.Price100 = obj.Price100;
+                objFromDb.Description = obj.Description;
+                objFromDb.CategoryId = obj.CategoryId;
+                objFromDb.Author = obj.Author;
+                objFromDb.ProductImages = obj.ProductImages;
+                //if (obj.ImageUrl != null)
+                //{
+                //    objFromDb.ImageUrl = obj.ImageUrl;
+                //}
             }
         }
     }

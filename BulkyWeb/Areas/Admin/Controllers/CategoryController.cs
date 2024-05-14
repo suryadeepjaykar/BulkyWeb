@@ -1,6 +1,5 @@
-﻿ using BulkyBook.DataAccess.Data;
-using BulkyBook.DataAccess.Repository;
-using BulkyBook.DataAccess.Repository.IRepository;
+﻿using BulkyBook.DataAccess.Repository.IRepository;
+using BulkyBook.DataAcess.Data;
 using BulkyBook.Models;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -19,29 +18,31 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Category> categoryList = _unitOfWork.Category.GetAll().ToList();
-            return View(categoryList);
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
+            return View(objCategoryList);
         }
+
         public IActionResult Create()
         {
-            return View(); 
+            return View();
         }
         [HttpPost]
         public IActionResult Create(Category obj)
         {
             if (obj.Name == obj.DisplayOrder.ToString())
             {
-                ModelState.AddModelError("Name", "The Diaplay Order cannot be exactly match the Name");
+                ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
             }
+
             if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Add(obj);
                 _unitOfWork.Save();
-                TempData["Success"] = "Category created successfully";
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
-
             return View();
+
         }
 
         public IActionResult Edit(int? id)
@@ -50,34 +51,28 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
-            //Category? categoryFormDb1 = _db.Categories.FirstOrDefault(u=>u.Id ==id);
-            //Category? categoryFormDb2 = _db.Categories.Where(u => u.Id == id).FirstOrDefault();
+            //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
+            //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
 
             if (categoryFromDb == null)
             {
                 return NotFound();
             }
-
             return View(categoryFromDb);
         }
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("Name", "The Diaplay Order cannot be exactly match the Name");
-            }
             if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
-                TempData["Success"] = "Category updated successfully";
+                TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
-
             return View();
+
         }
 
         public IActionResult Delete(int? id)
@@ -86,16 +81,12 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
-            //Category? categoryFormDb1 = _db.Categories.FirstOrDefault(u=>u.Id ==id);
-            //Category? categoryFormDb2 = _db.Categories.Where(u => u.Id == id).FirstOrDefault();
 
             if (categoryFromDb == null)
             {
                 return NotFound();
             }
-
             return View(categoryFromDb);
         }
         [HttpPost, ActionName("Delete")]
@@ -108,10 +99,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             _unitOfWork.Category.Remove(obj);
             _unitOfWork.Save();
-            TempData["Success"] = "Category deleted successfully";
+            TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
         }
-
     }
 }
-

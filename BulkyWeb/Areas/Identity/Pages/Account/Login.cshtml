@@ -1,23 +1,21 @@
 ﻿@page
 @model LoginModel
 
-
-
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-4">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="py-2 text-white">Log In</h2>
+                <h2 class="py-2 text-white">Log in</h2>
             </div>
         </div>
     </div>
-    <div class="card-body p-3">
+    <div class="card-body p-4">
         <div class="row">
             <div class="col-md-12">
                 <section>
                     <form id="account" method="post">
-                        <h3 class="borrder-bottom pb-3 mb-4 text-secondary text-center">Use a local account to log in.</h3>
-                        
+                        <h3 class="border-bottom pb-3 mb-4 text-secondary text-center">
+                            Use a local account to log in.</h3>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                         <div class="form-floating mb-3">
                             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
@@ -55,11 +53,9 @@
             <div class="col-md-12 p-3 text-center">
                 <section>
                     <p class="divider-text d-flex pt-3">or</p>
-                    
 
                     @{
-                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                        {
+                        if ((Model.ExternalLogins?.Count ?? 0) == 0) {
                             <div>
                                 <p>
                                     There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
@@ -69,13 +65,11 @@
                                 </p>
                             </div>
                         }
-                        else
-                        {
+                        else {
                             <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                                 <div>
                                     <p>
-                                        @foreach (var provider in Model.ExternalLogins!)
-                                        {
+                                        @foreach (var provider in Model.ExternalLogins!) {
                                             <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                                         }
                                     </p>
@@ -88,7 +82,6 @@
         </div>
     </div>
 </div>
-
 
 
 @section Scripts {

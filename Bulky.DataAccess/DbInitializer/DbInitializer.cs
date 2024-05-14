@@ -1,4 +1,4 @@
-﻿using BulkyBook.DataAccess.Data;
+﻿using BulkyBook.DataAcess.Data;
 using BulkyBook.Models;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Identity;
