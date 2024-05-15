@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Data;
-
+//need to check why company data is not populated to view after publishing app to azure
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
